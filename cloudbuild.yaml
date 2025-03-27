@@ -6,6 +6,6 @@ steps:
   args:
   - '-c'
   - |
-    gcloud compute scp --recurse ./my-repo/ instance-20250326-191400:/RC-AI --zone=us-central1-c
+    gcloud compute scp --recurse ./my-repo/ "instance-20250326-191400":/RC-AI --zone "us-central1-c"
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
