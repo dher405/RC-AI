@@ -16,3 +16,11 @@ steps:
       root@34.171.61.152:/RC-AI \
       --zone "us-central1-c" \
       --ssh-key-file ~/.ssh/id_rsa
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
+secrets:
+- secretEnv:
+    SSH_KEY: cb-ssh-key
