@@ -4,13 +4,24 @@ steps:
 
 - name: 'google/cloud-sdk'
   entrypoint: 'bash'
+  secretEnv: ['SSH_KEY']
   args:
   - '-c'
   - |
+    mkdir -p ~/.ssh
+    echo "$SSH_KEY" > ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    ssh-keyscan 34.171.61.152 >> ~/.ssh/known_hosts
     gcloud compute scp --recurse ./my-repo/ \
-      "instance-20250326-191400":/RC-AI \
-      --zone "us-central1-c"
+      root@34.171.61.152:/RC-AI \
+      --zone "us-central1-c" \
+      --ssh-key-file ~/.ssh/id_rsa
 
 options:
   logging: CLOUD_LOGGING_ONLY
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
+
+secrets:
+- secretEnv:
+    SSH_KEY: cb-ssh-key
+
