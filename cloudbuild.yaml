@@ -1,11 +1,11 @@
 steps:
 - name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'git@github.com:dher405/RC-AI.git', 'my-repo'] # Clone into 'my-repo' subdirectory
+  args: ['clone', 'https://github.com/dher405/RC-AI.git', 'my-repo'] #Use HTTPS url here.
 - name: 'google/cloud-sdk'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
-    gcloud compute scp --recurse ./my-repo/ instance-20250326-191400:/RC-AI --zone=us-central1-c #Adjust path to new folder.
+    gcloud compute scp --recurse ./my-repo/ instance-20250326-191400:/RC-AI --zone=us-central1-c
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
