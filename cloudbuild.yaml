@@ -1,0 +1,9 @@
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'git@github.com:dher405/RC-AI.git', '.']
+- name: 'google/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gcloud compute scp --recurse ./ instance-20250326-191400:/RC-AI --zone=us-central1-c
