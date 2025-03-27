@@ -9,10 +9,8 @@ steps:
   - |
     gcloud compute scp --recurse ./my-repo/ \
       "instance-20250326-191400":/RC-AI \
-      --zone "us-central1-c" \
-      --impersonate-service-account=cloud-build-deploy-238@primal-prism-169316.iam.gserviceaccount.com
+      --zone "us-central1-c"
 
 options:
   logging: CLOUD_LOGGING_ONLY
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
-  
