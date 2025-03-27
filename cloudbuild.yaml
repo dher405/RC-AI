@@ -7,3 +7,4 @@ steps:
   - '-c'
   - |
     gcloud compute scp --recurse ./ instance-20250326-191400:/RC-AI --zone=us-central1-c
+    logsBucket: 'gs://bucket2bucket3bucket'
