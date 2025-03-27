@@ -12,7 +12,9 @@ steps:
     chmod 600 /builder/home/.ssh/id_rsa
     ssh-keygen -y -f /builder/home/.ssh/id_rsa > /builder/home/.ssh/id_rsa.pub
     ssh-keyscan -H 34.171.61.152 > /builder/home/.ssh/known_hosts
-    scp -i /builder/home/.ssh/id_rsa -o UserKnownHostsFile=/builder/home/.ssh/known_hosts -r ./my-repo/ root@34.171.61.152:/RC-AI
+    scp -i /builder/home/.ssh/id_rsa \
+        -o UserKnownHostsFile=/builder/home/.ssh/known_hosts \
+        -r ./my-repo/ root@34.171.61.152:/RC-AI
 
 options:
   logging: CLOUD_LOGGING_ONLY
