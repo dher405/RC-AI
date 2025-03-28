@@ -1,20 +1,20 @@
 steps:
-- name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/dher405/RC-AI.git', 'my-repo']
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['clone', 'https://github.com/dher405/RC-AI.git', 'my-repo']
 
-- name: 'google/cloud-sdk'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    mkdir -p /builder/home/.ssh
-    gcloud secrets versions access latest --secret=cb-ssh-key > /builder/home/.ssh/id_rsa
-    chmod 600 /builder/home/.ssh/id_rsa
-    ssh-keygen -y -f /builder/home/.ssh/id_rsa > /builder/home/.ssh/id_rsa.pub
-    ssh-keyscan -H 34.171.61.152 > /builder/home/.ssh/known_hosts
-    scp -i /builder/home/.ssh/id_rsa \
-        -o UserKnownHostsFile=/builder/home/.ssh/known_hosts \
-        -r ./my-repo/ root@34.171.61.152:/RC-AI
+  - name: 'google/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        echo "Copying project to instance..."
+        gcloud compute ssh david_herron74_gmail_com@instance-20250326-191400 \
+          --zone=us-central1-c \
+          --command "sudo mkdir -p /RC-AI && sudo chown david_herron74_gmail_com /RC-AI"
+
+        gcloud compute scp --recurse ./my-repo/* \
+          david_herron74_gmail_com@instance-20250326-191400:/RC-AI \
+          --zone=us-central1-c
 
 options:
   logging: CLOUD_LOGGING_ONLY
